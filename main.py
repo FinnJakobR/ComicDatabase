@@ -1,14 +1,15 @@
+from api import Marvel
+from dotenv import load_dotenv
 import os
-import sys
-from configReader.config import Config
 
 def main():
-    CONFIG_PATH = sys.argv[1]
     
-    if(not CONFIG_PATH):
-        print("could not read CONFIG_PATH!")
+    load_dotenv()
+
+    public_key = os.getenv('PUBLIC_KEY')
+    private_key = os.getenv("PRIVATE_KEY")
     
-    config = Config(CONFIG_PATH)
-    
+    api = Marvel(public_key,private_key)
+    print(api.comics.all())
     
 main()
