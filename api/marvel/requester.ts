@@ -58,12 +58,12 @@ export default class Request extends Endpoint {
 
         var hash = generateMD5(input_string);
 
-        payload = new URLSearchParams();
-        payload.append("ts", timestamp);
-        payload.append("apikey", this.PUBLIC_KEY)
-        payload.append("hash", hash);
+        var newPayload = new URLSearchParams(payload);
+        newPayload.append("ts", String(timestamp));
+        newPayload.append("apikey", this.PUBLIC_KEY)
+        newPayload.append("hash", hash);
 
-        return payload;
+        return newPayload;
     }
 
     private check_for_exceptions(response: Response, json_data: any){
