@@ -1,8 +1,9 @@
 __pycache__/
-
+*.js
 # Environments
 .env
 .venv
 env/
 venv/
 ENV/
+/node_modules
