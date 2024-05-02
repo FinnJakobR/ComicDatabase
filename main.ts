@@ -1,6 +1,7 @@
 import Api from "./api/api.js";
 import dotenv from "dotenv";
 import DC from "./api/dc/dc.js";
+import RestApi from "./server/server.js";
 
 dotenv.config();
 
@@ -16,9 +17,8 @@ async function main() {
     
     var m = new Api(PUBLIC_KEY!, PRIVATE_KEY!,CLIENT_ID!,CLIENT_SECRET!, DC_API_KEY!);
 
-    var data = await m.dc.search_comic("The Boys");
+    var server = new RestApi(8000);
 
-    console.log(data);
 }
 
 main();

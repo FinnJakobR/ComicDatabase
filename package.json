@@ -14,8 +14,12 @@
     "@types/node": "^20.12.8",
     "comic-vine-sdk": "^1.2.8",
     "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "http": "^0.0.1-security",
     "https": "^1.0.0",
     "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21"
   }
 }
