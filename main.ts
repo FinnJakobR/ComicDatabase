@@ -1,11 +1,17 @@
-import marvel from "./api/marvel/marvel.js";
-import MangaAnime from "./api/MyMangaList/mangaAnime.js";
+import Api from "./api/api.js";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+
 
 async function main() {
-    var m = new MangaAnime();
-    var res = await m.anime.all("deathNote");
 
-    console.log(res);
+    const PUBLIC_KEY = process.env.PUBLIC_KEY;
+    const PRIVATE_KEY = process.env.PRIVATE_KEY;
+    const CLIENT_ID = process.env.CLIENT_ID;
+    const CLIENT_SECRET = process.env.CLIENT_SECRET;
+    var m = new Api(PUBLIC_KEY!, PRIVATE_KEY!,CLIENT_ID!,CLIENT_SECRET!);
 
 }
 

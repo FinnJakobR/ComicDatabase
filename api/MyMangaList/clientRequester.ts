@@ -38,11 +38,15 @@ export default class clientRequester extends Endpoint{
 
         var res = await fetch(url + "?" + payload, { method: 'GET', headers: headers})
 
-        console.log(res);
+        if(raw){
+            return res;
+        }
+
+          var json_data = (await res.json())["data"];
+
         this.check_for_exceptions(res);
 
-
-        return await res.json()
+        return json_data;
 
     }
 
