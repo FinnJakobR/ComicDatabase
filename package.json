@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^20.12.8",
+    "comic-vine-sdk": "^1.2.8",
     "dotenv": "^16.4.5",
     "http": "^0.0.1-security",
     "https": "^1.0.0",
