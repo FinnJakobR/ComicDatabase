@@ -14,7 +14,7 @@ class tokenizer {
     public current_indent_level: number;
     public is_logical_line: boolean;
     public is_indent: boolean;
-    public is_dedent: boolean;
+    public is_dedent:boolean;
     constructor(source: string){
         this.source = source;
         this.buffer = []
@@ -22,7 +22,7 @@ class tokenizer {
         this.is_newline = true;
         this.current_indent_level = 0;
         this.is_logical_line = true
-        this.is_dedent = false;
+        this.is_dedent = true;
         this.is_indent = false;
 
     }
@@ -85,19 +85,11 @@ class tokenizer {
 
             if(isnewline(current_char)){
 
-                
-                var char = this.next_char();
+                this.is_logical_line = false;
 
-                if(!is_space(char) && this.is_indent){
-                    this.is_indent = false;
-                    return new Token(TokenKind.DEDENT, "DEDENT")
-                }
+                this.next_char();
 
                 this.is_newline = true;
-                
-                this.is_indent = false;
-                
-                this.is_dedent = false;
 
 
                 this.current_indent_level = 0;
@@ -106,35 +98,47 @@ class tokenizer {
             }
 
             if(current_char && !isnewline(current_char)){
-                
-                this.is_logical_line = true;
+                ;
             
 
-                if(this.current_indent_level < 3 && !this.is_indent && !this.is_dedent){
+                if(this.current_indent_level >= 3 && !this.is_logical_line && !this.is_indent && this.is_dedent){
                     
                     this.is_indent = true;
-                    this.is_dedent = true;
-
-                    return new Token(TokenKind.DEDENT, "DEDENT")
-
-
-                }
-                
-                if(this.current_indent_level >= 3 && !this.is_indent){
-                    
-                    this.is_indent = true;
-
+                    this.is_dedent = false;
+;
                     this.current_indent_level -= 3;
+                    
+                    this.is_logical_line = true;
+
                     
                     return new Token(TokenKind.INDENT, "INDENT");
 
-                }else if(this.current_indent_level > 0 && this.is_indent) {
-                    this.current_indent_level --;
-
-                    return new Token(TokenKind.WHITESPACE, " ");
                 }
 
+                if(this.current_indent_level < 3 && !this.is_logical_line && this.is_indent && !this.is_dedent){
+                    
+                    this.is_indent = false;
+                    this.is_dedent = true;
 
+                    this.is_logical_line = true;
+                    
+                    return new Token(TokenKind.DEDENT, "DEDENT");
+
+                }
+
+                this.is_logical_line = true;
+
+                //go back um die whitespaces mit lexen zu können 
+
+                if(this.is_indent){
+                    this.cursor -= (this.current_indent_level - 3);
+                } else {
+                    this.cursor -= this.current_indent_level;
+                }
+            
+                current_char = this.source[this.cursor]
+
+                
                 if(this.is_newline){
                     var t = ""
                     while(isint(current_char)){
