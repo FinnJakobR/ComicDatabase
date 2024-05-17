@@ -4,10 +4,10 @@ import DC from "./api/dc/dc.js";
 import RestApi from "./server/server.js";
 import * as fs from 'fs';
 import * as path from 'path';
-import Lexer from "./markdown/lexer/lexer.js";
-import TokenKind from "./markdown/lexer/utils/kind.js";
+import Lexer from "./fml/lexer/lexer.js";
+import TokenKind from "./fml/lexer/utils/kind.js";
 
-const md_path = "test.md";
+const md_path = "test.fml";
 
 dotenv.config();
 
@@ -27,6 +27,9 @@ async function main() {
     //var server = new RestApi(8000);
 
     var source = fs.readFileSync(path.join(path.resolve(), md_path), {encoding: "utf8"});
+
+
+
 
     var l = new Lexer(source);
 
