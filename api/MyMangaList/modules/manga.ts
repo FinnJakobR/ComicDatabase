@@ -1,4 +1,5 @@
 import clientRequester from "../clientRequester.js";
+import MangaList from "../interfaces/manga_interface.js";
 
 
 export default class Manga extends clientRequester {
@@ -9,8 +10,8 @@ export default class Manga extends clientRequester {
 
     }
     
-    public async all(q: string, ...kwargs: any[]): Promise<any> {
-        const data = await this.request("manga",  kwargs.concat([`q=${q}`]));
+    public async all(q: string, ...kwargs: any[]): Promise<MangaList> {
+        const data = await this.request("manga",  kwargs.concat([`q=${q}&fields=id,title,start_date,rank,popularity,source,desc`])) as MangaList;
         return data;
     }
 

@@ -26,6 +26,8 @@ export default class Request extends Endpoint {
             payload = {};
         }
 
+        console.log(payload[0]);
+
         var url: string = this.get_endpoint(endpoint_name);
         
         if(identifier != null){

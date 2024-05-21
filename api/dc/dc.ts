@@ -7,15 +7,26 @@ export default class DC extends ComicVine{
     }
 
     async search_comic(name:string){
-        const data = await this.volume.list({limit: 50, filter: {name: name}});
 
-        return data.data.filter((i)=> i.publisher.name == "DC Comics");
+        const data = await this.issue.list({limit: 50, filter: {name: name}});
+
+        var dc_comics = [];
+        for (var comic of data.data){
+            const volume_data = await this.find_comic(comic["volume"]["id"])
+
+            if(volume_data?.publisher.name == "DC Comics") dc_comics.push(comic);
+        }
+
+        return dc_comics
     }
 
     async find_comic(id: number){
+        
         const data = await this.volume.retrieve(id);
 
         return data.publisher.name == "DC Comics" ? data : null;
+
+
 
     }
 

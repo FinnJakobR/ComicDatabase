@@ -42,7 +42,7 @@ export default class clientRequester extends Endpoint{
             return res;
         }
 
-          var json_data = (await res.json())["data"];
+          var json_data = (await res.json());
 
         this.check_for_exceptions(res);
 
