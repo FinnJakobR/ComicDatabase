@@ -1,5 +1,5 @@
 import clientRequester from "../clientRequester.js";
-import MangaList from "../interfaces/manga_interface.js";
+import MangaList, { MangaDetail, MangaRankingList } from "../interfaces/manga_interface.js";
 
 
 export default class Manga extends clientRequester {
@@ -15,23 +15,16 @@ export default class Manga extends clientRequester {
         return data;
     }
 
-    public async details(id: string, ...kwargs: any[]): Promise<any> {
+    public async details(id: string, ...kwargs: any[]): Promise<MangaDetail> {
         
-        const data = await this.request("manga", kwargs, null, id);
+        const data = await this.request("manga", kwargs, null, id) as  MangaDetail;
 
         return data;
     }
 
-    public async ranking(...kwargs: any[]): Promise<any> {
+    public async ranking(...kwargs: any[]): Promise<MangaRankingList> {
         
-        const data = await this.request("manga", kwargs, "ranking");
-
-        return data;
-    }
-
-    public async user_manga(user_name: string, ...kwargs: any[]): Promise<any> {
-        
-        const data = await this.request("manga", kwargs, `${user_name}/mangalist`);
+        const data = await this.request("manga", kwargs, "ranking") as MangaRankingList;
 
         return data;
     }

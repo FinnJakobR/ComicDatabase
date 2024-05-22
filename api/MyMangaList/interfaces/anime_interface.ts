@@ -1,3 +1,4 @@
+import { RelatedManga } from "./manga_interface";
 import AnimeListAlternativeTitleInterface from "./utils/alternative_title_interface";
 import AnimeListBroadcastInterface from "./utils/broadcast_interface";
 import AnimeListGenreInterface from "./utils/genre_iterface";
@@ -28,7 +29,7 @@ export interface AnimeRankingItem {
 
 export interface AnimeListItem {
     node : {
-            id: number;
+        id: number;
         title: string;
         main_picture?: AnimeListPictureInterface,
         alternative_titles?: AnimeListAlternativeTitleInterface
@@ -99,7 +100,7 @@ export interface AnimeDetail {
     pictures: AnimeListPictureInterface[],
     background?: string, 
     related_anime: RelatedAnime[],
-    related_manga: any,
+    related_manga: RelatedManga[],
     recommendations?: AnimeRecommendation[],
     statistics?: AnimeListStatisticsInterface
 
