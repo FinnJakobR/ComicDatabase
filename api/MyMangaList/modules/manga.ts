@@ -1,5 +1,6 @@
 import clientRequester from "../clientRequester.js";
-import MangaList, { MangaDetail, MangaRankingList } from "../interfaces/manga_interface.js";
+import MangaList, { MangaDetail } from "../interfaces/manga_interface.js";
+import { zod_schema_manga_list } from "../interfaces/validation/manga_interface_validation.js";
 
 
 export default class Manga extends clientRequester {
@@ -11,8 +12,11 @@ export default class Manga extends clientRequester {
     }
     
     public async all(q: string, ...kwargs: any[]): Promise<MangaList> {
-        const data = await this.request("manga",  kwargs.concat([`q=${q}&fields=id,title,start_date,rank,popularity,source,desc`])) as MangaList;
-        return data;
+        const data = await this.request("manga",  kwargs.concat([`q=${q}&fields=id,title,start_date,rank,popularity,source,desc`]));
+        
+        var x =  zod_schema_manga_list.parse(data)
+        
+        return x;
     }
 
     public async details(id: string, ...kwargs: any[]): Promise<MangaDetail> {
@@ -21,12 +25,4 @@ export default class Manga extends clientRequester {
 
         return data;
     }
-
-    public async ranking(...kwargs: any[]): Promise<MangaRankingList> {
-        
-        const data = await this.request("manga", kwargs, "ranking") as MangaRankingList;
-
-        return data;
-    }
-
 }

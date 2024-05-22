@@ -44,7 +44,7 @@ export interface MangaListItem {
 export interface RelatedManga {
     node: MangaDetail,
     relation_type: RELATION,
-    realtation_type_formatted: string
+    relation_type_formatted: string
 }
 
 export interface RecommendationsManga {
@@ -57,16 +57,7 @@ export interface SerializationManga {
     role: string,
 }
 
-export interface MangaRankingList {
-    data: MangaRankingListItem[],
-    paging: AnimeListPagingInterface
-}
 
-
-export interface MangaRankingListItem {
-    node: MangaListItem,
-    ranking: AnimeListRankingInterface
-}
 
 export interface MangaDetail {
     id: number,

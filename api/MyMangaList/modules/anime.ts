@@ -1,5 +1,5 @@
 import clientRequester from "../clientRequester.js";
-import AnimeList, { AnimeDetail, AnimeRankingList } from "../interfaces/anime_interface.js";
+import AnimeList, { AnimeDetail } from "../interfaces/anime_interface.js";
 
 
 export default class Anime extends clientRequester {

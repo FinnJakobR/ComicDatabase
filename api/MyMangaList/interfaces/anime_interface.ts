@@ -14,17 +14,6 @@ export default interface AnimeList {
     paging: AnimeListPagingInterface
 }
 
-export interface AnimeRankingList {
-    data: AnimeRankingItem[],
-    paging: AnimeListPagingInterface,
-
-}
-
-export interface AnimeRankingItem {
-    node: AnimeListItem,
-    ranking: AnimeListRankingInterface
-}
-
 
 
 export interface AnimeListItem {
